@@ -1,7 +1,4 @@
 
-.idea/vcs.xml
-.idea/inspectionProfiles/profiles_settings.xml
-.idea/MinecraftServerSpider.iml
-.idea/modules.xml
-.idea/misc.xml
-.idea/workspace.xml
+.idea/*
+*.py[cod]
+
