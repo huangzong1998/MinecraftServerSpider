@@ -8,12 +8,16 @@
 import scrapy
 
 
-class MinecraftserverspiderItem(scrapy.Item):
+class MinecraftServerSpiderItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
     pass
 
-class mcbbsServerItem(scrapy.Item):
+class McbbsJavaServerItem(scrapy.Item):
+    # 宣传贴标题
+    title = scrapy.Field()
+    # 发帖人昵称
+    author = scrapy.Field()
     # 服务器名称
     name = scrapy.Field()
     # 有效状态
@@ -44,5 +48,11 @@ class mcbbsServerItem(scrapy.Item):
     contact = scrapy.Field()
     # 服务器IP/域名
     ip_or_domain = scrapy.Field()
-
-    
+    # 评分参与人数
+    rate_num = scrapy.Field()
+    # 人气
+    popularity = scrapy.Field()
+    # 金粒
+    gold_nugget = scrapy.Field()
+    # 永久链接
+    permanent_link = scrapy.Field()

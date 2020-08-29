@@ -1,12 +1,17 @@
 # -*- coding: utf-8 -*-
 import scrapy
-from MinecraftServerSpider.items import mcbbsServerItem
 
-class McbbsSpider(scrapy.Spider):
-    name = 'mcbbs'
+from minecraft_server_spider.settings import ITEM_PIPELINES
+from minecraft_server_spider.items import McbbsJavaServerItem
+
+class McbbsJavaServerSpider(scrapy.Spider):
+    name = 'mcbbs_java_server'
     allowed_domains = ['mcbbs.net']
     start_urls = ['https://www.mcbbs.net/forum-server-1.html']
     base_url = 'https://www.mcbbs.net/'
+    custom_settings = {
+        ITEM_PIPELINES: {'minecraft_server_spider.pipelines.McbbsJavaServerPipeline': 300}
+    }
 
     # 解析服务器列表页面
     def parse(self, response):
@@ -15,19 +20,19 @@ class McbbsSpider(scrapy.Spider):
         for tbody in tbodies:
             link = tbody.xpath("./tr/th/a[@class='s xst']/@href").extract_first()
             if link:
-                yield scrapy.Request(self.base_url+link, callback=self.parse_server)
+                yield scrapy.Request(self.base_url + link, callback=self.parse_server)
 
         # 找下一页的链接
-        # next_page_link = response.xpath("//div[@class='bm bw0 pgs cl']/span[@id='fd_page_bottom']/div/a[@class='nxt']/@href").extract_first()
+        next_page_link = response.xpath("//div[@class='bm bw0 pgs cl']/span[@id='fd_page_bottom']/div/a[@class='nxt']/@href").extract_first()
         # 判断是否还有下一页
-        # if next_page_link:
-            # yield scrapy.Request(self.base_url+next_page_link, callback=self.parse)
+        if next_page_link:
+            yield scrapy.Request(self.base_url+next_page_link, callback=self.parse)
 
     # 解析服务器详细信息
     def parse_server(self, response):
         # 摘取服务器详细信息
         tr_list = response.xpath("//table[@class='cgtl mbm']/tbody/tr")
-        server = mcbbsServerItem()
+        server = McbbsJavaServerItem()
         for tr in tr_list:
             key = tr.xpath("./th/text()").extract_first()
             value = tr.xpath("./td")
@@ -36,7 +41,7 @@ class McbbsSpider(scrapy.Spider):
             elif key == "有效状态":
                 server['valid_status'] = value.xpath("./text()").extract_first()
             elif key == "支持版本":
-                server['support_version'] = value.xpath("./text()").extract_first().split()
+                server['support_version'] = value.xpath("./text()").extract_first()
             elif key == "盈利模式":
                 server['profit_mode'] = value.xpath("./text()").extract_first()
             elif key == "游戏模式":

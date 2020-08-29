@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Scrapy settings for MinecraftServerSpider project
+# Scrapy settings for minecraft_server_spider project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -9,17 +9,17 @@
 #     https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'MinecraftServerSpider'
+BOT_NAME = 'minecraft_server_spider'
 
-SPIDER_MODULES = ['MinecraftServerSpider.spiders']
-NEWSPIDER_MODULE = 'MinecraftServerSpider.spiders'
+SPIDER_MODULES = ['minecraft_server_spider.spiders']
+NEWSPIDER_MODULE = 'minecraft_server_spider.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'MinecraftServerSpider (+http://www.yourdomain.com)'
+#USER_AGENT = 'minecraft_server_spider (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = False
+ROBOTSTXT_OBEY = True
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -33,7 +33,7 @@ ROBOTSTXT_OBEY = False
 #CONCURRENT_REQUESTS_PER_IP = 16
 
 # Disable cookies (enabled by default)
-#COOKIES_ENABLED = False
+COOKIES_ENABLED = False
 
 # Disable Telnet Console (enabled by default)
 #TELNETCONSOLE_ENABLED = False
@@ -47,13 +47,13 @@ ROBOTSTXT_OBEY = False
 # Enable or disable spider middlewares
 # See https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'MinecraftServerSpider.middlewares.MinecraftserverspiderSpiderMiddleware': 543,
+#    'minecraft_server_spider.middlewares.MinecraftServerSpiderSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
-#    'MinecraftServerSpider.middlewares.MinecraftserverspiderDownloaderMiddleware': 543,
+#    'minecraft_server_spider.middlewares.MinecraftServerSpiderDownloaderMiddleware': 543,
 #}
 
 # Enable or disable extensions
@@ -64,9 +64,9 @@ ROBOTSTXT_OBEY = False
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'MinecraftServerSpider.pipelines.MinecraftserverspiderPipeline': 300,
-#}
+ITEM_PIPELINES = {
+    'minecraft_server_spider.pipelines.McbbsJavaServerPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
