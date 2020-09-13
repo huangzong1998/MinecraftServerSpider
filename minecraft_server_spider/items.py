@@ -48,12 +48,12 @@ class McbbsJavaServerItem(scrapy.Item):
     contact = scrapy.Field()
     # 服务器IP/域名
     ip_or_domain = scrapy.Field()
-    # 评分参与人数
-    rate_num = scrapy.Field()
-    # 人气
-    popularity = scrapy.Field()
-    # 金粒
-    gold_nugget = scrapy.Field()
+    # # 评分参与人数
+    # rate_num = scrapy.Field()
+    # # 人气
+    # popularity = scrapy.Field()
+    # # 金粒
+    # gold_nugget = scrapy.Field()
     # 永久链接
     permanent_link = scrapy.Field()
 
@@ -70,3 +70,25 @@ class McbbsBedrockServerItem(scrapy.Item):
     game_mode = scrapy.Field()
     # 支持版本
     support_version = scrapy.Field()
+    # 网络类型
+    network_type = scrapy.Field()
+    # 服务器类型
+    server_type = scrapy.Field()
+    # 最大在线人数
+    max_online_num = scrapy.Field()
+    #插件/行为包
+    plugins_or_behavior_pack = scrapy.Field()
+    # 联系方式
+    contact = scrapy.Field()
+    # 服务器IP/域名
+    ip_or_domain = scrapy.Field()
+    # 端口
+    port = scrapy.Field()
+    # 评分参与人数
+    rate_num = scrapy.Field()
+    # 人气
+    popularity = scrapy.Field()
+    # 金粒
+    gold_nugget = scrapy.Field()
+    # 永久链接
+    permanent_link = scrapy.Field()
