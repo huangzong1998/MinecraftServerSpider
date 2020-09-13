@@ -14,6 +14,10 @@ class MinecraftServerSpiderItem(scrapy.Item):
     pass
 
 class McbbsJavaServerItem(scrapy.Item):
+    # ID
+    _id = scrapy.Field()
+    # 更新日期
+    update_date = scrapy.Field()
     # 宣传贴标题
     title = scrapy.Field()
     # 发帖人昵称
@@ -58,6 +62,10 @@ class McbbsJavaServerItem(scrapy.Item):
     permanent_link = scrapy.Field()
 
 class McbbsBedrockServerItem(scrapy.Item):
+    # ID
+    _id = scrapy.Field()
+    # 更新日期
+    update_date = scrapy.Field()
     # 宣传贴标题
     title = scrapy.Field()
     # 发帖人昵称
@@ -77,18 +85,18 @@ class McbbsBedrockServerItem(scrapy.Item):
     # 最大在线人数
     max_online_num = scrapy.Field()
     #插件/行为包
-    plugins_or_behavior_pack = scrapy.Field()
+    plugins_and_behavior_pack = scrapy.Field()
     # 联系方式
     contact = scrapy.Field()
     # 服务器IP/域名
     ip_or_domain = scrapy.Field()
     # 端口
     port = scrapy.Field()
-    # 评分参与人数
-    rate_num = scrapy.Field()
-    # 人气
-    popularity = scrapy.Field()
-    # 金粒
-    gold_nugget = scrapy.Field()
+    # # 评分参与人数
+    # rate_num = scrapy.Field()
+    # # 人气
+    # popularity = scrapy.Field()
+    # # 金粒
+    # gold_nugget = scrapy.Field()
     # 永久链接
     permanent_link = scrapy.Field()

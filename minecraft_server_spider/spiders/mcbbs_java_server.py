@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import scrapy
 
-from minecraft_server_spider.settings import ITEM_PIPELINES
 from minecraft_server_spider.items import McbbsJavaServerItem
 
 class McbbsJavaServerSpider(scrapy.Spider):
@@ -27,8 +26,8 @@ class McbbsJavaServerSpider(scrapy.Spider):
             "//div[@class='bm bw0 pgs cl']/span[@id='fd_page_bottom']/div/a[@class='nxt']/@href").extract_first()
         # 判断是否还有下一页
         if next_page_link:
-            # yield scrapy.Request(self.base_url+next_page_link, callback=self.parse)
-            pass
+            yield scrapy.Request(self.base_url+next_page_link, callback=self.parse)
+            # pass
 
     # 解析服务器详细信息
     def parse_server(self, response):
@@ -46,7 +45,6 @@ class McbbsJavaServerSpider(scrapy.Spider):
             server['author'] = author
 
         # 摘取服务器详细信息
-        tr_list = response.xpath("//table[@class='cgtl mbm']/tbody/tr")
         tbody = response.xpath("//table[@class='cgtl mbm']/tbody")
         # 服务器名称
         server['name'] = tbody.xpath("./tr[1]/td/text()").extract_first()
@@ -77,7 +75,7 @@ class McbbsJavaServerSpider(scrapy.Spider):
         # 联系方式
         server['contact'] = tbody.xpath("./tr[14]/td/text()").extract_first()
         # 服务器IP/域名
-        server['ip_or_domain'] = tbody.xpath("./tr[15]/td/text()").extract_first()
+        server['ip_or_domain'] = tbody.xpath("./tr[15]/td/a/text()").extract_first()
 
         # # 评分人数
         # rate_num = response.xpath("//table[@class='ratl']/tbody[1]/tr/th[1]/a/span/text()").extract_first()
@@ -93,8 +91,9 @@ class McbbsJavaServerSpider(scrapy.Spider):
         #     server['gold_nugget'] = gold_nugget
 
         # 永久链接
-        permanent_link = response.xpath("//input[@class='px']/@value").extract_first()
+        permanent_link = response.xpath("//td[@class='plc plm']/div/div/input[@class='px']/@value").extract_first()
         if permanent_link:
             server['permanent_link'] = permanent_link
+            server['_id'] = permanent_link.replace('https://www.mcbbs.net/thread-', '').replace('-1-1.html', '')
 
         yield server
