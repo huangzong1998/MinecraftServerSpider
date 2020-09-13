@@ -30,9 +30,22 @@ class McbbsJavaServerSpider(scrapy.Spider):
 
     # 解析服务器详细信息
     def parse_server(self, response):
+
+        server = McbbsJavaServerItem()
+
+        # 宣传贴标题
+        title = response.xpath("//span[@id='thread_subject']/text()").extract_first()
+        if title:
+            server['title'] = title
+
+        # 发帖人ID
+        author = response.xpath("//table[@class='plhin']//div[@class='pls favatar']//div[@class='authi']/a/text()").extract_first()
+        if author:
+            server['author'] = author
+
         # 摘取服务器详细信息
         tr_list = response.xpath("//table[@class='cgtl mbm']/tbody/tr")
-        server = McbbsJavaServerItem()
+
         for tr in tr_list:
             key = tr.xpath("./th/text()").extract_first()
             value = tr.xpath("./td")
@@ -67,4 +80,16 @@ class McbbsJavaServerSpider(scrapy.Spider):
             elif key == "服务器IP/域名":
                 server['ip_or_domain'] = value.xpath("./a/text()").extract_first()
 
+        # 评分人数
+        rate_num = response.xpath("//table[@class='ratl']/tbody[1]/tr/th[1]/a/span/text()").extract_first()
+        if rate_num:
+            server['rate_num'] = rate_num
+        # 人气
+        popularity = response.xpath("//table[@class='ratl']/tbody[1]/tr/th[2]/i/span/text()").extract_first()
+        if popularity:
+            server['popularity'] = popularity
+        #金粒
+        gold_nugget = response.xpath("//table[@class='ratl']/tbody[1]/tr/th[3]/i/span/text()").extract_first()
+        if gold_nugget:
+            server['gold_nugget'] = gold_nugget
         yield server

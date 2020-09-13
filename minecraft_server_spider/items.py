@@ -56,3 +56,17 @@ class McbbsJavaServerItem(scrapy.Item):
     gold_nugget = scrapy.Field()
     # 永久链接
     permanent_link = scrapy.Field()
+
+class McbbsBedrockServerItem(scrapy.Item):
+    # 宣传贴标题
+    title = scrapy.Field()
+    # 发帖人昵称
+    author = scrapy.Field()
+    # 服务器名称
+    name = scrapy.Field()
+    # 有效状态
+    valid_status = scrapy.Field()
+    # 游戏模式
+    game_mode = scrapy.Field()
+    # 支持版本
+    support_version = scrapy.Field()

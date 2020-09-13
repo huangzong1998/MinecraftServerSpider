@@ -52,9 +52,9 @@ COOKIES_ENABLED = False
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
-#    'minecraft_server_spider.middlewares.MinecraftServerSpiderDownloaderMiddleware': 543,
-#}
+DOWNLOADER_MIDDLEWARES = {
+    'minecraft_server_spider.middlewares.RandomUserAgentMiddlware': 543
+}
 
 # Enable or disable extensions
 # See https://doc.scrapy.org/en/latest/topics/extensions.html
@@ -65,7 +65,7 @@ COOKIES_ENABLED = False
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'minecraft_server_spider.pipelines.McbbsJavaServerPipeline': 300,
+    'minecraft_server_spider.pipelines.McbbsJavaServerPipeline': 300
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
